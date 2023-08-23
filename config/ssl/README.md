@@ -9,6 +9,8 @@ This repository contains the configuration files for zookeeper, zookeeper client
 **1. Generate CA** <br />
 openssl req -new -x509 -keyout ca-key -out ca-cert -days 3650
 
+keytool -printcert -v -file ca-cert
+
 **2. Create Truststore** <br />
 keytool -keystore kafka.zookeeper.truststore.jks -alias ca-cert -import -file ca-cert
 
