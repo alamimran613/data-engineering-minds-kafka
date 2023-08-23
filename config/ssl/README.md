@@ -9,8 +9,6 @@ This repository contains the configuration files for zookeeper, zookeeper client
 **1. Generate CA** <br />
 openssl req -new -x509 -keyout ca-key -out ca-cert -days 3650
 
-keytool -printcert -v -file ca-cert
-
 **2. Create Truststore** <br />
 keytool -keystore kafka.zookeeper.truststore.jks -alias ca-cert -import -file ca-cert
 
@@ -29,6 +27,18 @@ keytool -keystore kafka.zookeeper.keystore.jks -alias ca-cert -import -file ca-c
 **7. Import the signed certificate from step 5 into Keystore** <br />
 keytool -keystore kafka.zookeeper.keystore.jks -alias zookeeper -import -file ca-signed-zookeeper
 
+**8. Configure Zookeeper clients, Use Below file** <br />
+[](./Zookeeper-Clients.md)
+
+### Check what inside Key store and Trust Store
+
+keytool -list -v -keystore kafka.zookeeper.keystore.jks
+
+keytool -list -v -keystore kafka.zookeeper.truststore.jks
+
+### Check Your Certificate File Contents
+
+keytool -printcert -v -file ca-cert
 
 ### To check all the brokers connected to the Zookeeper running in 2-way SSL mode
 `
