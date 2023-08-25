@@ -10,8 +10,15 @@ keytool -keystore kafka.broker3.truststore.jks -alias ca-cert -import -file ca-c
 
 **2. Create Keystore** <br />
 keytool -keystore kafka.broker3.keystore.jks -alias broker3 -validity 3650 -genkey -keyalg RSA -ext SAN=dns:<enter your hostname/dns here>
+**or**
 
-### When prompt <What is your first and last name?> Then enter your <hostname/dns> here that you use above**
+**For Private and Public DNS use below command**
+keytool -keystore kafka.broker3.keystore.jks -alias broker3 -validity 3650 -genkey -keyalg RSA -ext SAN=dns:ec2-13-233-170-112.ap-south-1.compute.amazonaws.com,dns:ip-172-31-38-217.ap-south-1.compute.internal
+
+### When prompt <What is your first and last name?> Then enter your <hostname/dns> here that provide below**
+
+ec2-13-233-170-112.ap-south-1.compute.amazonaws.com
+
 
 **3. Create certificate signing request (CSR)** <br />
 keytool -keystore kafka.broker3.keystore.jks -alias broker3 -certreq -file ca-request-broker3
@@ -37,9 +44,9 @@ sudo systemctl restart kafka
 
 ### Check what inside Key store and Trust Store
 
-keytool -list -v -keystore kafka.broker1.keystore.jks
+keytool -list -v -keystore kafka.broker1.keystore.jks -storepass serversecret
 
-keytool -list -v -keystore kafka.broker2.truststore.jks
+keytool -list -v -keystore kafka.broker2.truststore.jks -storepass serversecret
 
 ### Check Your Certificate File Contents
 
