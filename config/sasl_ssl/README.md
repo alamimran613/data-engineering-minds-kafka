@@ -5,6 +5,10 @@ This repository contains the configuration files for zookeeper, Kafka brokers, p
 1. Please remember just for showing a demo, I have shown the password directly inside the property files. Please never do that on a production environment; oor make sure that the property files are placed inside admin-only directories with highly restricted access.
 2. For creating kafka topics in secured way (no more using *--zookeeper* and port 2181), please follow the steps mentioned [here](https://github.com/vinclv/data-engineering-minds-kafka/blob/main/config/sasl_ssl/SecureTopicCreation.md).
 
+## **Use Below File For Start (This Line added by Imran**
+
+Use me >> [](./Create-Users.md)
+
 ## kafka-configs.sh commands to create, delete and list SASL/SCRAM credentials
 ### To create a SASL/SCRAM user
 `kafka-configs.sh --zookeeper localhost:2182 --zk-tls-config-file zookeeper-client.properties --entity-type users --entity-name my-user --alter --add-config 'SCRAM-SHA-512=[password=DEM123]'`
