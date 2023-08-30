@@ -2,7 +2,19 @@
 
 ## **First We Create broker-admin User/"User Principal" For Kafka Brokers**
 
-bin/kafka-configs.sh --zookeeper localhost:2182 --zk-tls-config-file zookeeper-client.properties --entity-type users --entity-name broker-admin --alter --add-config 'SCRAM-SHA-512=[password=DEM123]
+bin/kafka-configs.sh --zookeeper ip-172-31-36-6.ap-south-1.compute.internal:2182 --zk-tls-config-file config/zookeeper-client.properties --entity-type users --entity-name broker-admin --alter --add-config 'SCRAM-SHA-512=[password=Dem123]'
+
+## **List All Available Users**
+
+bin/kafka-configs.sh --zookeeper ip-172-31-36-6.ap-south-1.compute.internal:2182 --zk-tls-config-file config/zookeeper-client.properties --entity-type users --describe
+
+### **Describe SASL/SCRAM Specific User**
+
+bin/kafka-configs.sh --zookeeper ip-172-31-36-6.ap-south-1.compute.internal:2182 --zk-tls-config-file config/zookeeper-client.properties --entity-type users --entity-name broker-admin --describe
+
+## **Delete SASL/SCRAM User**
+
+bin/kafka-configs.sh --zookeeper ip-172-31-36-6.ap-south-1.compute.internal:2182 --zk-tls-config-file config/zookeeper-client.properties --entity-type users --entity-name broker-admin --alter --delete-config 'SCRAM-SHA-512'
 
 ## For more info use this file
 
@@ -18,15 +30,15 @@ Update Broker-3 >> [](./server-2.properties)
 
 ## Restart all Brokers
 
-sudo sytemctl restart kafka
+sudo systemctl restart kafka
 
 ## **Create Producer User/User Principal For Producer Clients**
 
-bin/kafka-configs.sh --zookeeper localhost:2182 --zk-tls-config-file zookeeper-client.properties --entity-type users --entity-name sasl-producer --alter --add-config 'SCRAM-SHA-512=[password=Dem1234]
+bin/kafka-configs.sh --zookeeper ip-172-31-36-6.ap-south-1.compute.internal:2182 --zk-tls-config-file zookeeper-client.properties --entity-type users --entity-name sasl-producer --alter --add-config 'SCRAM-SHA-512=[password=Dem1234]'
 
 ## **Create Consumer User/User Principal For Consumer Clients**
 
-bin/kafka-configs.sh --zookeeper localhost:2182 --zk-tls-config-file zookeeper-client.properties --entity-type users --entity-name sasl-consumer --alter --add-config 'SCRAM-SHA-512=[password=Dem1234]
+bin/kafka-configs.sh --zookeeper ip-172-31-36-6.ap-south-1.compute.internal:2182 --zk-tls-config-file zookeeper-client.properties --entity-type users --entity-name sasl-consumer --alter --add-config 'SCRAM-SHA-512=[password=Dem1234]'
 
 ## **Create ACLs For User/User Principal For Write and Read**
 
